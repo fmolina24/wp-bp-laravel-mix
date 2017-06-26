@@ -11,17 +11,26 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('assets/js/app.js', 'dist/js/')
-   .sass('assets/scss/app.scss', 'dist/css/')
-    .copy('assets/fonts','dist/fonts')
-    .copy('assets/images','dist/images')
-    .extract(['jquery','bootstrap-sass'])
-    .autoload({
-        jquery: ['$','jQuery','jquery']
-    })
-    .options({
-        processCssUrls: false,
-    });
+// Compile Javascript and Sass files.
+mix.js('assets/js/app.js', 'dist/js/');
+mix.sass('assets/scss/app.scss', 'dist/css/');
+
+// Copy over images and fonts
+mix.copy('assets/fonts','dist/fonts');
+mix.copy('assets/images','dist/images');
+
+// Extract packages to a vendor file and autoload jquery.
+mix.extract(['jquery','bootstrap-sass']);
+mix.autoload({
+    jquery: ['$','jQuery','jquery']
+});
+
+// Prevent mix from trying to resolve urls.
+mix.options({
+    processCssUrls: false,
+});
+
+
 // Full API
 // mix.js(src, output);
 // mix.react(src, output); <-- Identical to mix.js(), but registers React Babel compilation.
