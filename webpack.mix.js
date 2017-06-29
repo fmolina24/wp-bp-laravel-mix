@@ -1,4 +1,6 @@
 let mix = require('laravel-mix');
+let ImageMinPlugin = require('imagemin-webpack-plugin').default;
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,9 +17,8 @@ let mix = require('laravel-mix');
 mix.js('assets/js/app.js', 'dist/js/');
 mix.sass('assets/scss/app.scss', 'dist/css/');
 
-// Copy over images and fonts
+// Copy over fonts
 mix.copy('assets/fonts','dist/fonts');
-mix.copy('assets/images','dist/images');
 
 // Extract packages to a vendor file and autoload jquery.
 mix.extract(['jquery','bootstrap-sass']);
@@ -28,6 +29,18 @@ mix.autoload({
 // Prevent mix from trying to resolve urls.
 mix.options({
     processCssUrls: false,
+});
+
+mix.webpackConfig({
+    plugins: [
+        new CopyWebpackPlugin([{
+            from: 'assets/images',
+            to: 'dist/images'
+        }]),
+        new ImageMinPlugin([{
+            test: /\.(jpe?g|png|gif|svg)$/i
+        }])
+    ]
 });
 
 
