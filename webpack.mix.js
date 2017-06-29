@@ -12,6 +12,8 @@ let CopyWebpackPlugin = require('copy-webpack-plugin');
  | file for your application, as well as bundling up your JS files.
  |
  */
+// Set Public Path Current Directory
+mix.setPublicPath('./');
 
 // Compile Javascript and Sass files.
 mix.js('assets/js/app.js', 'dist/js/');
@@ -30,6 +32,9 @@ mix.autoload({
 mix.options({
     processCssUrls: false,
 });
+
+// Add Versioning
+mix.version();
 
 mix.webpackConfig({
     plugins: [

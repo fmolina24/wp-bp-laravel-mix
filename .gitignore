@@ -1,5 +1,4 @@
-/dist/*
-!/dist/.gitkeep
+/dist/
 node_modules
 .idea
 
